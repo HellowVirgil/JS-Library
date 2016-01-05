@@ -1,31 +1,3 @@
-// 使用方法
-// ajax
-/*options = {
-	url: "http:www.baidu.com",
-	type: "GET",
-	data: {
-
-	},
-	dataType: "json",
-	success: function() {
-
-	},
-	fail: function() {
-
-	}
-}*/
-// jsonp
-/*options = {
-	url: "http:www.baidu.com",
-	data: {
-
-	},
-	success: function() {
-
-	},
-	callback: ""
-}*/
-
 function formatParams(data) {	//格式化参数
 	var arr = [];
 	for(name in data) {
@@ -85,5 +57,5 @@ function josnp(options) {
 		options.success && options.success(json);
 	};
 
-	oScript.src = url + "?" + params;
+	oScript.src = options.url + "?" + params;
 }
