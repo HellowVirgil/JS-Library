@@ -8,7 +8,9 @@
 insertAfter(newElement, targetElement) 第一个参数为要插入的新元素节点，第二个参数为要插入处的元素节点
 
 > DragDrop 对象是一个使用了模块模式的单例,使元素可拖拽
+
 使用方法为：
+```javascript
 DragDrop.addHandler("dragstart", function () {
     var status = document.getElementById("status");
     status.innerHTML = "Started dragging " + event.target.id;
@@ -21,6 +23,7 @@ DragDrop.addHandler("dragend", function () {
     var status = document.getElementById("status");
     status.innerHTML = "Dropped " + event.target.id + " st (" + event.x + ", " + event.y + ")";
 });
+```      
 
 > ready 判断文档是否加载完成
 
@@ -29,7 +32,9 @@ ready(fn) 参数为文档加载完成时的回调函数
 ###Util.js——工具类方法的封装
 
 > ajax(options) ajax请求函数
+
 使用方法：
+```javascript
 var options = {
  	url: "http:www.baidu.com",
 	type: "GET",
@@ -42,10 +47,12 @@ var options = {
 	}
 }
 ajax(options);
-
+```
 
 > jsonp(options) jsonp请求函数
+
 使用方法：
+```javascript
 options = {
 	url: "http:www.baidu.com",
 	data: {
@@ -55,5 +62,6 @@ options = {
 	callback: ""
 }
 jsonp(options);
+```
 
 ###EventUtil.js——事件处理方法的工具类
