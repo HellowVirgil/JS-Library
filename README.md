@@ -1,13 +1,11 @@
 ## JS-Library
 一个简单的JS库
 
-###DOM.js——dom相关方法的封装
+### DOM.js——dom相关方法的封装
 
-> insertAfter 在某个元素前插入新元素
+* insertAfter(newElement, targetElement) 在某个元素前插入新元素，newElement 为要插入的新元素节点，targrtElement 为要插入处的元素节点
 
-insertAfter(newElement, targetElement) 第一个参数为要插入的新元素节点，第二个参数为要插入处的元素节点
-
-> DragDrop 对象是一个使用了模块模式的单例,使元素可拖拽
+* DragDrop 对象是一个使用了模块模式的单例,使元素可拖拽
 
 使用方法为：
 ```javascript
@@ -25,13 +23,18 @@ DragDrop.addHandler("dragend", function () {
 });
 ```      
 
-> ready 判断文档是否加载完成
+* ready(fn) 判断文档是否加载完成，参数为文档加载完成时的回调函数
 
-ready(fn) 参数为文档加载完成时的回调函数
+使用方法：
+```javascript
+ready(function () {
+    //操作DOM
+});
+```
 
-###Util.js——工具类方法的封装
+### Util.js——工具类方法的封装
 
-> ajax(options) ajax请求函数
+* ajax(options) ajax请求函数
 
 使用方法：
 ```javascript
@@ -49,7 +52,7 @@ var options = {
 ajax(options);
 ```
 
-> jsonp(options) jsonp请求函数
+* jsonp(options) jsonp请求函数
 
 使用方法：
 ```javascript
@@ -64,4 +67,54 @@ options = {
 jsonp(options);
 ```
 
-###EventUtil.js——事件处理方法的工具类
+* throttle(method, context) 函数节流，使某个函数一定时间内只能调用一次，method 为待处理函数，context 为上下文环境
+
+使用方法：
+```javascript
+function resizeDiv () {
+    var div = document.getElementById("myDiv");
+    div.style.height = div.offsetWidth + "px";
+}
+window.onresize = function () {
+    throttle(resizeDiv);
+}
+```
+
+* chunk(arry, process, context) 数组分块(定时器时间间隔设置为100ms)，将长数组分为小段处理，arry 为待分块数组，process 为处理函数，context 为上下文环境
+
+使用方法：
+```javascript
+var data = [];
+function printValue (item) {
+    var div = document.getElementById("myDiv");
+    div.innerHTML += item + "<br>";
+}
+chunk(data, printValue);
+```
+
+* curry(fn) 函数柯里化，将函数的某个参数变为实参
+
+使用方法：
+```javascript
+function add (num1, num2) {
+    return num1 + num2;
+}
+var curriedAdd = curry(add, 5);
+alert(curriedAdd(3));   //8
+```
+
+* bind(fn, context) 返回一个在给定环境中调用给定函数的函数，fn 为一个函数，context 为上下文环境
+
+使用方法：
+```javascipt
+var handler = {
+    message: "Event handled",
+    handleClick: function (event) {
+        alert(this.message + ":" + ebent.type);
+    }
+};
+var btn = document.getElementById("my-btn");
+EventUtil.addHandler(btn, "click", bind(handler.handleClick, handler));
+```
+
+### EventUtil.js——事件处理方法的工具类

@@ -111,7 +111,7 @@ function chunk (arry, process, context) {
 }
 
 //函数柯里化
-function curry(fn) {
+function curry (fn) {
     var args = Array.prototype.slice.call(arguments, 1);
     return function () {
         var innerArgs = Array.prototype.slice.call(arguments);
@@ -121,7 +121,7 @@ function curry(fn) {
 }
 
 //函数运行时环境绑定
-function bind(fn, context) {
+function bind (fn, context) {
     var args = Array.prototype.slice.call(arguments, 2);
     return function () {
         var innerArgs = Array.prototype.slice.call(arguments);

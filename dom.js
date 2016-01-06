@@ -104,7 +104,7 @@ var DragDrop = function () {
         EventUtil.removeHandler(document, "mousedown", handleEvent);
         EventUtil.removeHandler(document, "mousemove", handleEvent);
         EventUtil.removeHandler(document, "mouseup", handleEvent);
-    }
+    };
 
     return dragdrop;
 }
