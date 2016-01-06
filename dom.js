@@ -1,3 +1,5 @@
+var EventUtil = require("EventUtil.js");
+
 function insertAfter(newElement, targetElement) {
 	var parentNode = targetElement.parentNode;
 
@@ -41,35 +43,68 @@ function ready(readFn) {
 	}
 }
 
-function drag(element) {
-	var distX=0;
-	var distY=0;
+//拖拽
+var DragDrop = function () {
+    var dragdrop = new EventTarget(),
+        dragging = null,
+        diffX = 0,
+        diffY = 0;
 
-	element.addEventListener("mousedown", function down(ev) {
-		var oEvent = ev || event;
-		distX = oEvent.clientX - element.offsetLeft; //获取边界到鼠标的距离
-		distY = oEvent.clientY - element.offsetTop;
+    function handleEvent (event) {
+        event = EventUtil.getEvent(event);
+        var target = EventUtil.getTarget(event);
 
-		document.addEventListener("mousemove", function move(ev){
-			var oEvent = ev || event;
-			var x = oEvent.clientX - distX;
-			var y = oEvent.clientY - distY;
-			if (x < 0) {
-				x = 0;
-			}
-			if (y < 0) {
-				y = 0;
-			}
-			if (x > (document.documentElement.clientWidth - oDiv.offsetWidth)) {
-				x = document.documentElement.clientWidth - oDiv.offsetWidth;
-			}
-			element.style.left = x + "px"; //根据鼠标位置相对定位，得到left，top值
-			element.style.top = y + "px";
-		});
+        switch (event.type) {
+            case "mousedown":
+                if (target.className.indexOf("draggable") > -1) {
+                    dragging = target;
+                    diffX = event.clientX - target.offsetLeft;
+                    diffY = event.clientY - target.offsetTop;
+                    //触发自定义事件
+                    dragdrop.fire({
+                        type: "dragstart",
+                        target: dragging,
+                        x: event.clientX,
+                        y: event.clientY
+                    });
+                }
+                break;
 
-		document.addEventListener("mouseup", function up() {
-			document.removeEventListener("mousemove", move);
-			document.removeEventListener("mouseup", up);
-		});
-	});
+            case "mousemove":
+                if (dragging !== null) {
+                    dragging.style.left = (event.clientX - diffX) + "px";
+                    dragging.style.top = (event.clientY - diffY) + "px";
+                    dragdrop.fire({
+                        type: "drag",
+                        target: dragging,
+                        x: event.clientX,
+                        y: event.clientY
+                    });
+                }
+                break;
+            case "mouseup":
+                dragdrop.fire({
+                    type: "dragend",
+                    target: dragging,
+                    x: event.clientX,
+                    y: event.clientY
+                });
+                dragging = null;
+                break;
+        }
+    }
+
+    dragdrop.enable = function () {
+        EventUtil.addHandler(document, "mousedown", handleEvent);
+        EventUtil.addHandler(document, "mousemove", handleEvent);
+        EventUtil.addHandler(document, "mouseup", handleEvent);
+    };
+
+    dragdrop.disable = function () {
+        EventUtil.removeHandler(document, "mousedown", handleEvent);
+        EventUtil.removeHandler(document, "mousemove", handleEvent);
+        EventUtil.removeHandler(document, "mouseup", handleEvent);
+    }
+
+    return dragdrop;
 }
