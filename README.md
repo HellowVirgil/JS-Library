@@ -5,6 +5,13 @@
 
 * insertAfter(newElement, targetElement) 在某个元素前插入新元素，newElement 为要插入的新元素节点，targrtElement 为要插入处的元素节点
 
+使用方法为：
+```javascript
+var div = document.getElementById("myDiv");
+var newDiv = document.createElement("<div class="newDiv"></div>");
+insertAfter(newDiv, div);
+```
+
 * DragDrop 对象是一个使用了模块模式的单例,使元素可拖拽
 
 使用方法为：
@@ -28,7 +35,7 @@ DragDrop.addHandler("dragend", function () {
 使用方法：
 ```javascript
 ready(function () {
-    //操作DOM
+    //do something
 });
 ```
 
@@ -118,3 +125,65 @@ EventUtil.addHandler(btn, "click", bind(handler.handleClick, handler));
 ```
 
 ### EventUtil.js——事件处理方法的工具类
+
+* addHandler(element, type, handler) 为元素添加事件监听
+
+使用方法：
+```javascript
+var div = document.getElementById("myDiv");
+EventUtil.addHandler(div, "click", function (e) {
+    //do something
+});
+```
+
+* removeHandler(element, type, handler) 移除事件监听
+
+使用方法：
+```javascript
+EventUtil.removeHandler(div, "click", function (e) {
+    //do something
+});
+```
+
+* getEvent(event) 返回事件对象
+
+使用方法：
+```javascript
+EventUtil.addHandler(div, "click", function (e) {
+    var event = EventUtil.getEvent(e);
+});
+```
+
+* getTarget(event) 返回目标元素
+
+使用方法：
+```javascript
+EventUtil.addHandler(div, "click", function (e) {
+    var event = EventUtil.getEvent(e);
+    var target = EventUtil.getTarget(event);
+});
+```
+
+* preventDefault(event) 阻止默认行为
+
+使用方法：
+```javascript
+EventUtil.addHandler(div, "click", function (e) {
+    var event = EventUtil.getEvent(e);
+    EventUtil.preventDefault(event);
+});
+```
+
+* stopPropagation(event) 阻止冒泡
+
+使用方法：
+```javascript
+EventUtil.addHandler(div, "click", function (e) {
+    var event = EventUtil.getEvent(e);
+    EventUtil.stopPropagation(event);
+});
+```
+
+
+
+### Cookie.js——Cookie处理相关函数封装

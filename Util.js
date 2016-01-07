@@ -53,9 +53,9 @@ function ajax (options) {
 				options.success && options.success(xhr.responseText, xhr.responseXML);
 			} else {
 				options.fail && options.fail(xhr.status);
-			};
-		};
-	}
+			}
+		}
+	};
 
 	if (options.type == "GET") {
 		xhr.open("GET", url + "?" + params, true);
