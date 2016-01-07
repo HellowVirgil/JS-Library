@@ -44,7 +44,7 @@ var EventUtil = {
         }
     },
     //返回鼠标移动时相关元素信息，只对于mouseover和mouseout事件才包含值
-    getRelatedTarget: function () {
+    getRelatedTarget: function (event) {
         if (event.relatedTarget) {
             return event.relatedTarget;
         } else if (event.toElement) {
@@ -88,45 +88,6 @@ var EventUtil = {
             return event.charCode;
         } else {
             return event.keyCode;
-        }
-    }
-};
-
-//自定义事件
-function EventTarget () {
-    this.handlers = {};
-}
-
-EventTarget.prototype = {
-    constructor: EventTarget,
-    addHandler: function (type, handler) {
-        if (typeof this.handlers[type] == "undefined") {
-            this.handlers[type] = [];
-        }
-
-        this.handlers[type].push(handler);
-    },
-    fire: function (event) {
-        if (!event.target) {
-            event.target = this;
-        }
-        if (this.handlers[event.type] instanceof Array) {
-            var handlers = this.handlers[event.type];
-            for (var i = 0, len = handlers.length; i < len; i++) {
-                handlers[i](event);
-            }
-        }
-    },
-    removeHandler: function (type, handler) {
-        if (this.handlers[event.type] instanceof Array) {
-            var handlers = this.handlers[event.type];
-            for (var i = 0, len = handlers.length; i < len; i++) {
-                if (handlers[i] === handler) {
-                    break;
-                }
-            }
-
-            handlers.splice(i, 1);
         }
     }
 };

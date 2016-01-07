@@ -1,4 +1,5 @@
 var EventUtil = require("EventUtil.js");
+var EventTarget = require("EventTarget.js");
 
 function insertAfter(newElement, targetElement) {
 	var parentNode = targetElement.parentNode;
@@ -10,7 +11,7 @@ function insertAfter(newElement, targetElement) {
 	}
 }
 
-function ready(readFn) {
+function ready(readyFn) {
 	if (document.addEventListener) {
 		document.addEventListener("DOMContentLoaded", function() {
 			readyFn && readyFn();
@@ -107,4 +108,4 @@ var DragDrop = function () {
     };
 
     return dragdrop;
-}
+};

@@ -12,7 +12,7 @@ var newDiv = document.createElement("<div class="newDiv"></div>");
 insertAfter(newDiv, div);
 ```
 
-* DragDrop 对象是一个使用了模块模式的单例,使元素可拖拽
+* DragDrop 对象是一个使用了模块模式的单例，使元素可拖拽，自定义了drag、dragstart、dragend事件
 
 使用方法为：
 ```javascript
@@ -124,7 +124,7 @@ var btn = document.getElementById("my-btn");
 EventUtil.addHandler(btn, "click", bind(handler.handleClick, handler));
 ```
 
-### EventUtil.js——事件处理方法的工具类
+### EventUtil.js——EventUtil对象是事件处理方法的集合
 
 * addHandler(element, type, handler) 为元素添加事件监听
 
@@ -184,6 +184,20 @@ EventUtil.addHandler(div, "click", function (e) {
 });
 ```
 
+* getRelatedTarget(event) 返回鼠标移动时相关元素信息，只对于mouseover和mouseout事件才包含值
 
+* getButton(event) 返回鼠标按钮值，0 表示主鼠标按钮，1 表示中间的鼠标按钮，2 表示次鼠标按钮
+
+* getWheelDelta(event) 获取鼠标滚轮增量
+
+* getCharCode(event) 返回按键的ASCII编码，只有触发keypress事件时才有值
+
+### EventTarget.js——自定义事件类
+
+* addHandler
+
+* fire
+
+* removeHandler
 
 ### Cookie.js——Cookie处理相关函数封装
