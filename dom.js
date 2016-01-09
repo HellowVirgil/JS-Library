@@ -44,7 +44,6 @@ function ready(readyFn) {
 	}
 }
 
-//拖拽
 var DragDrop = function () {
     var dragdrop = new EventTarget(),
         dragging = null,
@@ -61,7 +60,6 @@ var DragDrop = function () {
                     dragging = target;
                     diffX = event.clientX - target.offsetLeft;
                     diffY = event.clientY - target.offsetTop;
-                    //触发自定义事件
                     dragdrop.fire({
                         type: "dragstart",
                         target: dragging,
