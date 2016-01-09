@@ -11,9 +11,10 @@ var newDiv = document.createElement("<div class="newDiv"></div>");
 insertAfter(newDiv, div);
 ```
 
-* DragDrop 对象是一个使用了模块模式的单例，使元素可拖拽，自定义了drag、dragstart、dragend事件
+* DragDrop 对象是一个使用了模块模式的单例，使元素可拖拽，自定义了drag、dragstart、dragend事件,使用前给需要添加拖拽的元素加上"draggable"类名
 
 ```javascript
+DragDrop.enable();
 DragDrop.addHandler("dragstart", function () {
     var status = document.getElementById("status");
     status.innerHTML = "Started dragging " + event.target.id;
@@ -178,10 +179,10 @@ EventUtil.addHandler(div, "click", function (e) {
 
 ### EventTarget.js——自定义事件类
 
-* addHandler
+* addHandler 注册事件
 
-* fire
+* fire 触发事件
 
-* removeHandler
+* removeHandler 移除事件
 
 ### Cookie.js——Cookie处理相关函数封装

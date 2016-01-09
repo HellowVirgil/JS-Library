@@ -1,5 +1,5 @@
-var EventUtil = require("EventUtil.js");
-var EventTarget = require("EventTarget.js");
+var EventUtil = require("./EventUtil.js");
+var EventTarget = require("./EventTarget.js");
 
 function insertAfter(newElement, targetElement) {
 	var parentNode = targetElement.parentNode;
@@ -44,7 +44,7 @@ function ready(readyFn) {
 	}
 }
 
-var DragDrop = function () {
+var DragDrop = (function () {
     var dragdrop = new EventTarget(),
         dragging = null,
         diffX = 0,
@@ -106,4 +106,4 @@ var DragDrop = function () {
     };
 
     return dragdrop;
-};
+})();

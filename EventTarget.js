@@ -36,3 +36,5 @@ EventTarget.prototype = {
         }
     }
 };
+
+module.exports = EventTarget;
