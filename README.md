@@ -186,3 +186,7 @@ EventUtil.addHandler(div, "click", function (e) {
 * removeHandler 移除事件
 
 ### Cookie.js——Cookie处理相关函数封装
+
+* CookieUtil Cookie对象，包括get(name),set(name, value, expires, path, domain, secure),unset(name, path, domain, secure)方法
+
+* SubCookieUtil 子Cookie对象，包括get(name, subName),getAll(name)方法
