@@ -190,3 +190,34 @@ EventUtil.addHandler(div, "click", function (e) {
 * CookieUtil Cookie对象，包括get(name),set(name, value, expires, path, domain, secure),unset(name, path, domain, secure)方法
 
 * SubCookieUtil 子Cookie对象，包括get(name, subName),getAll(name)方法
+
+### Promise.js——promise实现链式调用，封装了 Promise 和 Deferred 类
+
+```javascipt
+//对响应对象进行封装
+//实现Promise化API
+var promisify = function (res) {
+    var deferred = new Deferred();
+    var result = "";
+    res.on("data", function (chunk) {
+        result += chunk;
+        deferred.progress(chunk);
+    });
+    res.("end", function (err) {
+        deferred.resolve(result);
+    });
+    res.on("error", function (err) {
+        deferred.reject(err);
+    });
+    return deferred.promise;
+};
+//调用
+promisity(res).then(function () {
+    //Done
+}, function (err) {
+    //Error
+}, function (chunk) {
+    //progress
+    console.log("BODY:" + chunk);
+});
+```
